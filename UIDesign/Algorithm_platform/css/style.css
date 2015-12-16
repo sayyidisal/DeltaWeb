@@ -1,0 +1,14 @@
+/*page: record*/
+#record-input{
+	height: 300px;
+}
+#record-control{
+	padding: 10px 0px;
+}
+#record-editor{
+	height: 300px;
+}
+#record-editor span.label{
+	position: relative;
+	top: -2px;
+}
