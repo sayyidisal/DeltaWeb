@@ -12,3 +12,33 @@
 	position: relative;
 	top: -2px;
 }
+
+/*page: list*/
+#question-list h3{
+	padding-bottom: 20px;
+}
+#question-list h4 a{
+	color: #333;
+}
+#question-list>ul>li{
+	list-style: none;
+}
+
+#question-list>ul>li>p+p{
+	float: right;
+}
+
+.tag-container a:hover{
+	text-decoration: none;
+}
+.tag-container a:hover span.label{
+	color: #ddd;
+}
+.tag-container a{
+	padding-right: 10px;
+}
+
+#list-pagination{
+	clear:both;
+	padding-left: 50px;
+}
