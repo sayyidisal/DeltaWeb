@@ -7,12 +7,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/app.js"></script>
-  <script src="js/list.js"></script>
+	<script src="js/question.js"></script>
+  <script src="js/prettify.js"></script>
 	<title>Question: some question</title>
 </head>
 <body>
 	<nav-bar></nav-bar>
+  <div class="container" id="question-container" ng-controller="QuestionCtrl as question">
+    <div class="page-header">
+      <h3>{{question.title}} <small ><a ng-repeat="tag in question.tags" href="../tag/{{tag}}">{{tag}}</a></small></h3>
+    </div>
+    <div id="question-content" class="monokai">
+      <p>{{question.content}}</p>
+      <code>{{question.code}}</code>     
+      <div class="btn-group" role="group">
+        <a type="button" class="btn btn-default" href="{{question.download_link}}" target="_blank"><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Download as PDF</a>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#answer-modal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Show me answer</button>
+      </div>
+      </div>
+        <!-- modal -->
+      <div class="modal fade" id="answer-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" >Answer</h4>
+          </div>
+          <div class="modal-body">{{question.answer}}</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 	<!-- move to html files when fetching from the server -->
     <script type="text/ng-template" id="nav.html">
         <nav class="navbar navbar-default">

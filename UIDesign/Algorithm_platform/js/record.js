@@ -45,9 +45,9 @@
 
 jQuery(document).ready(function($) {
 
-	$('#record-insert').on('click', function() {
-		replaceSelectionWithHtml("&nbsp;<span class='label label-default'>" + getSelectionHtml() + "</span>&nbsp;");
-	});
+	// $('#record-insert').on('click', function() {
+	// 	replaceSelectionWithHtml("&nbsp;<span class='label label-default'>" + getSelectionHtml() + "</span>&nbsp;");
+	// });
 
 	$('#record-detect').on('click', function() {
 		v = $('#record-editor').text();
