@@ -3,8 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/record.js"></script>
@@ -15,7 +17,7 @@
     <nav-bar></nav-bar>
     <div class="container page-content">
         <div class="page-header">
-          <h1> Record Questions <small>variable supported!</small></h1>
+          <h3> Record Questions <small class="pd-left-5">variable supported</small></h3>
         </div>    
             <form action="" id="record-form" ng-controller="RecordCtrl as recordCtrl">
                 <div class="container-fluid">
@@ -53,30 +55,29 @@
     </div>
 
 <!-- move to html files when fetching from the server -->
-    <script type="text/ng-template" id="nav.html">
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" ng-href="{{links.home}}">Algorithm Platform</a>
+     <script type="text/ng-template" id="nav.html">
+          <nav class="container">
+            <div id="nav-container">
+              <div id="logo" class="pull-left"><a href="index.html">
+                <strong>{</strong>Algorithm Platform<strong>}</strong>
+              </a></div>
+              <div class="pull-right">
+                    <ul class="top-social no-bottom-margin">
+                      <li><a href="#" title="share to Facebook" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-facebook"></i></a></li>
+                      <li><a href="#" title="Share by email" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-envelope-o "></i></a></li>
+                      <li><a href="#" title="Fork on Github" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-github"></i></a></li>
+                    </ul>
+                    <div class="top-search">
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search ...">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                      </div><!-- /input-group -->
+                    </div>
+                  </div>
             </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li class="active"><a ng-href="{{links.home}}">Home <span class="sr-only">(current)</span></a></li>
-                <li><a ng-href="{{links.others}}">other Link</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a ng-href="{{links.login}}">Login/Signup</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+          </nav>
     </script>
 </body>
 </html>

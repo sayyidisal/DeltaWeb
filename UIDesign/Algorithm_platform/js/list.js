@@ -54,6 +54,27 @@
 			tags: ["CS", "ios", "object-c"],
 			url: "",
 		}];
+
+		$scope.initLoading = function() {
+			$(function() {
+				$(window).scroll(function() {
+					if ($(window).scrollTop() > (30+$('#loading').offset().top - $(window).height())) {
+						$scope.questions.push({
+							title: "How do I test if a string is empty in Objective C?",
+							desc: "How do I test if an NSString is empty in Objective C?",
+							author: "Teacher E",
+							author_url: "",
+							tags: ["CS", "ios", "object-c"],
+							url: "",
+						});
+						$scope.$apply();
+					};
+				});
+			});
+		};
+
+		$scope.initLoading();
+
 	}])
 
 	app.controller('PaginationCtrl', ['$scope', function($scope) {
