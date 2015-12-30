@@ -21,22 +21,50 @@
 	}])
 
 	app.controller('RecordCtrl', ['$scope', function($scope) {
-			$scope.variables = [{
-				default: "2",
-				type: 1,
-				index: 1,
-			}, {
-				default: "3",
-				type: 1,
-				index: 2,
-			}];
-			$scope.insertVariable = function(defaultValue) {
+			$scope.variables = [];
+			$scope.classType = ["success", "primary", "warning"];
+			$scope.insertVariable = function() {
+				$(function() {
+					$('#record-editor').focus();
+				});
 				this.variables.push({
-					default: defaultValue,
 					type: 1,
-					index: this.variables.length + 1
+					index: this.variables.length + 1,
+					val: "",
+				})
+				replaceSelectionWithHtml("&nbsp;<span class='label label-success' contenteditable='false' id='variable-label" + this.variables.length + "'>#" + this.variables.length + "</span>&nbsp;");
+				$(function() {
+					$('.collapse').removeClass('in');
+					setTimeout(function() {
+						$('[data-variable]').unbind('click').click(function(event) {
+							var labelClass = $scope.classType[parseInt($(this).attr('data-checked')) - 1];
+							$('#variable-label' + $(this).attr('data-variable')).attr('class', 'label label-' + labelClass);
+						});
+					}, 20);
+
+				});
+			}
+
+			$scope.titleConfirm = function() {
+				$(function() {
+					if ($('#titleModal input').val()) {
+						$('#record-title span:first-child').html($('#titleModal input').val());
+					};
+					$('#titleModal').modal('hide');
 				})
 			}
+
+			$scope.tagConfirm = function() {
+				$(function() {
+					tagsHtml = "", tags = $('#tagModal input').val().split(";");
+					for (var i = tags.length - 1; i >= 0; i--) {
+						tagsHtml = '<span class="label">' + $.trim(tags[i]) + "</span>" + tagsHtml;
+						$('#record-title small').html(tagsHtml);
+					};
+					$('#tagModal').modal('hide');
+				})
+			}
+
 		}])
 		//module footer
 })()
@@ -45,46 +73,10 @@
 
 jQuery(document).ready(function($) {
 
-	// $('#record-insert').on('click', function() {
-	// 	replaceSelectionWithHtml("&nbsp;<span class='label label-default'>" + getSelectionHtml() + "</span>&nbsp;");
-	// });
-
-	$('#record-detect').on('click', function() {
-		v = $('#record-editor').text();
-		for (var i = v.length - 1; i >= 0; i--) {
-			if ((!isNaN(parseInt(v[i])) && isNaN(parseInt(v[i - 1])))) {
-				v = v.slice(0, i) + "&nbsp<span contenteditable='false' class='label label-default'>" + v.slice(i);
-			} else if ((isNaN(parseInt(v[i])) && !isNaN(parseInt(v[i - 1])))) {
-				v = v.slice(0, i) + "</span>&nbsp" + v.slice(i);
-			}
-		};
-		$('#record-editor').html(v);
-		$('#set-variable').removeClass('hide');
-	});
-
 });
 
 
 // utility functions
-
-function getSelectionHtml() {
-	var html = "";
-	if (typeof window.getSelection != "undefined") {
-		var sel = window.getSelection();
-		if (sel.rangeCount) {
-			var container = document.createElement("div");
-			for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-				container.appendChild(sel.getRangeAt(i).cloneContents());
-			}
-			html = container.innerHTML;
-		}
-	} else if (typeof document.selection != "undefined") {
-		if (document.selection.type == "Text") {
-			html = document.selection.createRange().htmlText;
-		}
-	}
-	return html
-}
 
 function replaceSelectionWithHtml(html) {
 	var range, html;
