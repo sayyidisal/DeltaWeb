@@ -21,4 +21,5 @@
 
 jQuery(document).ready(function($) {
 	$('[data-toggle="tooltip"]').tooltip();
+	$('#index-wrap').height($(window).height());
 });

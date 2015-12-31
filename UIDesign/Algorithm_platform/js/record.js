@@ -58,7 +58,7 @@
 				$(function() {
 					tagsHtml = "", tags = $('#tagModal input').val().split(";");
 					for (var i = tags.length - 1; i >= 0; i--) {
-						tagsHtml = '<span class="label">' + $.trim(tags[i]) + "</span>" + tagsHtml;
+						tagsHtml = '<a class="tag-link" href="tag/'+$.trim(tags[i])+'">' + $.trim(tags[i]) + "</a>" + tagsHtml;
 						$('#record-title small').html(tagsHtml);
 					};
 					$('#tagModal').modal('hide');

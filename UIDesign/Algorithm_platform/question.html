@@ -17,7 +17,7 @@
 	<nav-bar></nav-bar>
   <div class="container" id="question-container" ng-controller="QuestionCtrl as question">
     <div class="page-header">
-      <h3>{{question.title}} <small ><a ng-repeat="tag in question.tags" href="../tag/{{tag}}">{{tag}}</a></small></h3>
+      <h3>{{question.title}} <small ><a class="tag-link" ng-repeat="tag in question.tags" href="../tag/{{tag}}">{{tag}}</a></small></h3>
     </div>
     <div id="question-content" class="monokai">
       <p>{{question.content}}</p>
