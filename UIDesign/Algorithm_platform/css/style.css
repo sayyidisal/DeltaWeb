@@ -134,6 +134,9 @@ footer .footer-container{
 #index-wrap nav{
 	z-index: 100;
 }
+#index-wrap nav .form-control{
+	background: rgba(255,255,255,.8);
+}
 #index-wrap .background-wrap{
 	background: rgba(255,255,255,0.1);
 	position: absolute;
@@ -178,7 +181,7 @@ footer .footer-container{
 	padding-top: 30px;
 }
 .index-func{
-	background: rgba(217, 237, 247, 0.8);
+	background: rgba(217, 237, 247, 0.7);
 	height: 180px;
 	width: 400px;
 	position: absolute;
@@ -216,8 +219,12 @@ box-shadow: 5px 5px 5px 1px rgba(175,202,9,0.48);
 	margin-bottom: 10px;
 }
 /*page: record*/
+#record-title>span{
+	outline-color: #afca09;
+}
 #record-title small{
-	padding-left: 15px;
+	margin-left: 15px;
+	cursor: pointer;
 }
 #record-title small span{
 	margin-left: 10px;

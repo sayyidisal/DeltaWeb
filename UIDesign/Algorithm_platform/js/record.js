@@ -45,12 +45,18 @@
 				});
 			}
 
-			$scope.titleConfirm = function() {
+			// $scope.titleConfirm = function() {
+			// 	$(function() {
+			// 		if ($('#titleModal input').val()) {
+			// 			$('#record-title span:first-child').html($('#titleModal input').val());
+			// 		};
+			// 		$('#titleModal').modal('hide');
+			// 	})
+			// }
+
+			$scope.editTitle = function() {
 				$(function() {
-					if ($('#titleModal input').val()) {
-						$('#record-title span:first-child').html($('#titleModal input').val());
-					};
-					$('#titleModal').modal('hide');
+					$('#record-title>span').focus();
 				})
 			}
 
@@ -58,9 +64,11 @@
 				$(function() {
 					tagsHtml = "", tags = $('#tagModal input').val().split(";");
 					for (var i = tags.length - 1; i >= 0; i--) {
-						tagsHtml = '<a class="tag-link" href="tag/'+$.trim(tags[i])+'">' + $.trim(tags[i]) + "</a>" + tagsHtml;
-						$('#record-title small').html(tagsHtml);
+						if ($.trim(tags[i]) != "") {
+							tagsHtml = '<a class="tag-link" href="#' + $.trim(tags[i]) + '">' + $.trim(tags[i]) + "</a>" + tagsHtml;
+						};
 					};
+					$('#record-title small').html(tagsHtml);
 					$('#tagModal').modal('hide');
 				})
 			}
