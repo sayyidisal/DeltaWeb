@@ -12,12 +12,12 @@
 	<script src="js/record.js"></script>
 	<title>Record Questions</title>
 </head>
-<body>
+<body id="record-body">
     <nav-bar></nav-bar>
     <div class="container page-content">
             <form action="" id="record-form" ng-controller="RecordCtrl as record">
               <div class="page-header">
-                <h3 id="record-title"><span contenteditable>Question title</span><small  data-toggle="modal" data-target="#tagModal">add tags here</small></h3>
+                <h3 id="record-title">1. <span contenteditable>Question title</span><small  data-toggle="modal" data-target="#tagModal">add tags here</small></h3>
               </div> 
                 <div class="container-fluid">
                     <div class="col-lg-8">
@@ -39,55 +39,59 @@
                           <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
                               <a role="button" data-toggle="collapse" data-parent="#set-variable" href="#collapse{{variable.index}}" aria-expanded="false" aria-controls="collapse{{variable.index}}">
-                                Variable #{{variable.index}}:
+                                Variable a{{variable.index}}:
                                 <!-- more settings here -->
                               </a>
+                              <a href="#" class="pull-right" ng-click="removeVariable(variable.index)">&times;</a>
                             </h4>
                           </div>
                           <div id="collapse{{variable.index}}" class="panel-collapse collapse in" role="tabpanel">
                             <div class="panel-body">
                               <div class="btn-group" data-toggle="buttons" data-variable="{{variable.index}}" data-checked="{{variable.type}}">
                                 <label class="btn btn-success active" ng-click="variable.type=1;">
-                                  <input type="radio" name="options{{variable.index}}" checked> range
+                                  <input type="radio" name="options{{variable.index}}" checked> Integer
                                 </label>
                                 <label class="btn btn-primary" ng-click="variable.type=2">
-                                  <input type="radio" name="options{{variable.index}}"> formulated
-                                </label>
-                                <label class="btn btn-warning" ng-click="variable.type=3">
-                                  <input type="radio" name="options{{variable.index}}"> set
+                                  <input type="radio" name="options{{variable.index}}"> Float
                                 </label>
                               </div>
 
                             <hr/>
-
-                              <input name="range{{variable.index}}" type="text" class="col-lg-12 form-control" placeholder="use - to seperate, example: 1-100" ng-show="variable.type==1">
-                              <input name="formula{{variable.index}}" type="text" class="col-lg-12 form-control" placeholder="place your formula here" ng-show="variable.type==2">
-                              <input name="set{{variable.index}}" type="text" class="col-lg-12 form-control" placeholder="seperate the values with ;" ng-show="variable.type==3">
-
+                                <span class="variable-label">range:</span>
+                                <div class="row variable-range">
+                                  <div class="col-lg-6"><input type="number" class="form-control" ng-blur="updateFormula(variable.index)"></div>
+                                  <div class="col-lg-6"><input type="number" class="form-control" ng-blur="updateFormula(variable.index)"></div>
+                                </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                   
+                </div> 
+                <div class="page-header">
+                    <h3>2. Edit Formulas</h3>
+                </div> 
+                <div class="container-fluid">
+                
+                  <div class="col-lg-8">
+                    <ul class="formula-container form-control" ng-show="variables.length>0">
+                      <li ng-repeat="variable in variables"><span>{{variable.index}}.</span><input type="text"></li>
+                    </ul>
+                  </div>
+
+                </div>
+                <div class="page-header">
+                    <h3>3. Edit Answers <small>use the variables indicated above</small></h3>
+                </div> 
+                <div class="container-fluid">
+                
+                  <div class="col-lg-8">
+                    <textarea name="answer" class="form-control" id="" cols="30" rows="10"></textarea>
+                  </div>
+
                 </div>
                 <!-- modal -->
-<!--                 <div class="modal fade" id="titleModal">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Edit title</h4>
-                      </div>
-                      <div class="modal-body">
-                        <input type="text" class="form-control" placeholder="Your questions title here...">
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success" ng-click="titleConfirm()">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
                 <div class="modal fade" id="tagModal">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">

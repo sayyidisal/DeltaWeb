@@ -23,6 +23,12 @@
 	app.controller('RecordCtrl', ['$scope', function($scope) {
 			$scope.variables = [];
 			$scope.classType = ["success", "primary", "warning"];
+
+			$scope.removeVariable=function (index) {
+				$scope.variables.splice(index-1, 1);
+				document.getElementById('variable-label'+index).remove();
+			}
+
 			$scope.insertVariable = function() {
 				$(function() {
 					$('#record-editor').focus();
@@ -32,27 +38,46 @@
 					index: this.variables.length + 1,
 					val: "",
 				})
-				replaceSelectionWithHtml("&nbsp;<span class='label label-success' contenteditable='false' id='variable-label" + this.variables.length + "'>#" + this.variables.length + "</span>&nbsp;");
+				replaceSelectionWithHtml("&nbsp;<span class='label label-success' contenteditable='false' id='variable-label" + this.variables.length + "'>a" + this.variables.length + "</span>&nbsp;");
 				$(function() {
 					$('.collapse').removeClass('in');
 					setTimeout(function() {
 						$('[data-variable]').unbind('click').click(function(event) {
 							var labelClass = $scope.classType[parseInt($(this).attr('data-checked')) - 1];
 							$('#variable-label' + $(this).attr('data-variable')).attr('class', 'label label-' + labelClass);
+							index = parseInt($(this).attr('data-variable'));
+							var a = $('#collapse' + index + " input").eq(2).val().replace(/\s/g, ""),
+								b = $('#collapse' + index + " input").eq(3).val().replace(/\s/g, "");
+							setTimeout(function() {
+								if (a != "" && b != "") {
+									if ($('#collapse' + index + " input").eq(0).parent().hasClass('active')) {
+										$('.formula-container li').eq(index - 1).find('input').val("a" + index + "= randomInt(" + a + "," + b + ");");
+									} else {
+										$('.formula-container li').eq(index - 1).find('input').val("a" + index + "= randomFloat(" + a + "," + b + ");");
+									}
+								};
+							}, 20);
 						});
 					}, 20);
 
 				});
 			}
 
-			// $scope.titleConfirm = function() {
-			// 	$(function() {
-			// 		if ($('#titleModal input').val()) {
-			// 			$('#record-title span:first-child').html($('#titleModal input').val());
-			// 		};
-			// 		$('#titleModal').modal('hide');
-			// 	})
-			// }
+			$scope.updateFormula = function(index) {
+				$(function() {
+					var a = $('#collapse' + index + " input").eq(2).val().replace(/\s/g, ""),
+						b = $('#collapse' + index + " input").eq(3).val().replace(/\s/g, "");
+
+					if (a != "" && b != "") {
+						if ($('#collapse' + index + " input").eq(0).parent().hasClass('active')) {
+							$('.formula-container li').eq(index - 1).find('input').val("a" + index + "= randomInt(" + a + "," + b + ");");
+						} else {
+							$('.formula-container li').eq(index - 1).find('input').val("a" + index + "= randomFloat(" + a + "," + b + ");");
+						}
+
+					};
+				})
+			}
 
 			$scope.editTitle = function() {
 				$(function() {
