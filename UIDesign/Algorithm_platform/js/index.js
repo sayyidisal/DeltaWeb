@@ -16,12 +16,17 @@
 			}],
 		};
 	}])
-
-	app.controller('FuncCtrl', ['$scope', function($scope) {
-		this.info = {
-			loginAs: 0, //0 as not login, 1 as student, 2 as instructor
-			username: "Wei",
-		}
+	app.controller('FuncCtrl', ['$http', '$log', function($http, $log) {
+		var user = this;
+		// user.info = {
+		// 		loginAs: 0, //0 as not login, 1 as student, 2 as instructor
+		// 		username: "Wei",
+		// }
+		$http.get('/user.json').success(function(data) {
+			// pointer changes, can't use this anymore. thus use store to refer to the previous pointer
+			store.user = data;
+			// rest things to do
+		})
 	}])
 
 	app.controller('SignupCtrl', ['$scope', function($scope) {
