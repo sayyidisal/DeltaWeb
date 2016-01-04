@@ -44,6 +44,11 @@
 		$scope.errorEmail = false;
 
 		$scope.submitForm = function() {
+			$scope.formData = {
+				usename: document.getElementById('s-username').value,
+				password: document.getElementById('s-password').value,
+				email: document.getElementById('s-email').value,
+			};
 			$http({
 					method: 'POST',
 					url: 'signupProcess', // to be changed
@@ -79,6 +84,10 @@
 		$scope.errorAuthen = false;
 
 		$scope.submitForm = function() {
+			$scope.formData = {
+				usename: document.getElementById('l-username').value,
+				password: document.getElementById('l-password').value,
+			};
 			$http({
 					method: 'POST',
 					url: 'LoginProcess', // to be changed
