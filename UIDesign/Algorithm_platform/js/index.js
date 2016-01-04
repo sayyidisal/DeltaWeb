@@ -1,11 +1,9 @@
 (function() {
-	var app = angular.module('platform-index', []);
-
 
 	userInfo = {
 		loginAs: 0, //0 as not login, 1 as student, 2 as instructor
 		username: "Wei",
-		errors:{
+		errors: {
 			errorName: true,
 			errorEmail: true,
 			errorAuthen: true,
@@ -18,7 +16,9 @@
 	// 	// rest things to do
 	// })
 
-	app.directive('navBar', [function() {
+	angular.module('platform-index', [])
+
+	.directive('navBar', [function() {
 		return {
 			restrict: 'E',
 			templateUrl: "nav.html",
@@ -34,11 +34,11 @@
 		};
 	}])
 
-	app.controller('FuncCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+	.controller('FuncCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
 		$rootScope.info = userInfo;
 	}])
 
-	app.controller('SignupCtrl', ['$http', '$scope', '$rootScope', function($http, $scope, $rootScope) {
+	.controller('SignupCtrl', ['$http', '$scope', '$rootScope', function($http, $scope, $rootScope) {
 		$scope.formData = {};
 		$scope.errorName = false;
 		$scope.errorEmail = false;
@@ -69,6 +69,7 @@
 						// if success, update user data and apply
 						$rootScope.info = data;
 						$rootScope.$digest();
+						// to be changed
 						$(function() {
 							$('#signupModal').modal('hide');
 						})
@@ -78,7 +79,7 @@
 
 	}])
 
-	app.controller('LoginCtrl', ['$http', '$scope', '$rootScope', function($http, $scope, $rootScope) {
+	.controller('LoginCtrl', ['$http', '$scope', '$rootScope', function($http, $scope, $rootScope) {
 
 		$scope.formData = {};
 		$scope.errorAuthen = false;
@@ -101,7 +102,7 @@
 					if (!data.success) {
 						// if not successful, bind errors to error variables
 						$scope.errorAuthen = data.errors.errorAuthen; //true not match
-	
+
 					} else {
 						// if success, update user data and apply
 						$rootScope.info = data;
@@ -114,11 +115,13 @@
 				});
 		};
 
-	}])
+	}]);
 
 })()
 
 jQuery(document).ready(function($) {
+
 	$('[data-toggle="tooltip"]').tooltip();
 	$('#index-wrap').height($(window).height());
+
 });

@@ -17,9 +17,8 @@ a:focus{
 input,button,textarea{
 	outline: none;
 }
-body{
+#index-body{
 	min-width: 1100px;
-	/*background: url(../img/bg_bright.png);*/
 }
 body::after {
   content: "";
@@ -286,22 +285,22 @@ box-shadow: 5px 5px 5px 1px rgba(175,202,9,0.48);
 #record-body .container-fluid{
 	padding-bottom: 20px;
 }
-.formula-container{
+#formula-container{
 	height: auto;
 	padding: 10px 15px;
 }
-.formula-container li{
+#formula-container li{
 	list-style: none;
 	position: relative;
 	padding-bottom: 5px;
 }
-.formula-container li span{
+#formula-container li span{
 	color: #bbb;
 	position: absolute;
 	top: 2px;
 	left: -7px;
 }
-.formula-container li input{
+#formula-container li input{
 	width: 98%;
 	margin-left: 10px;
 	border: none;
@@ -353,6 +352,24 @@ box-shadow: 5px 5px 5px 1px rgba(175,202,9,0.48);
 	text-align: center;
 	padding-bottom: 20px;
 	font-size: 16px;
+}
+.filter-container h4{
+	margin-top: 30px;
+	margin-bottom: 20px;
+	border-left: 2px solid #AFCA09;
+	padding-left: 8px;
+}
+.filter-container{
+	line-height: 30px;
+	/*padding-left: 10px;*/
+}
+.filter-container a{
+	margin-left: 10px;
+}
+.filter-container a:hover,
+.filter-container a:active,
+.filter-container a:focus{
+	text-decoration: none;
 }
 /*question content*/
 .page-header{
