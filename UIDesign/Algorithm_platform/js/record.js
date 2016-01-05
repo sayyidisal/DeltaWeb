@@ -41,6 +41,7 @@
 				val: "",
 			})
 			replaceSelectionWithHtml("&nbsp;<span class='label label-success' contenteditable='false' id='variable-label" + $scope.counter + "'>a" + $scope.counter + "</span>&nbsp;");
+			// not sure whether can be turned into angular js
 			$(function() {
 				$('.collapse').removeClass('in');
 				setTimeout(function() {
@@ -115,9 +116,6 @@
 })()
 
 // utility functions
-jQuery(document).ready(function($) {
-
-});
 
 function replaceSelectionWithHtml(html) {
 	var range, html;

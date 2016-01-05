@@ -5,34 +5,36 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/minislate.css">
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-  <script src="js/list.js"></script>
-	<title>My Questions</title>
+  <script src="js/minislate.js"></script>
+  <script src="js/tag.js"></script>
+	<title>Java</title>
 </head>
 <body>
 	<nav-bar></nav-bar>
-  <div class="container">
-    <div class="col-lg-9" id="question-list" ng-controller="ListCtrl as list">
-      <h3>My Questions</h3>
-      <ul>
-        <li ng-repeat="question in questions">
-          <h4><a href="{{question.url}}">{{question.title}}</a></h4>
-          <p>{{question.desc}} …</p>
-          <p>created by <a href="{{question.author_url}}">{{question.author}}</a></p>
-          <div class="tag-container">
-            <a href="../tag/{{tag}}" ng-repeat="tag in question.tags"><span class="label label-default">{{tag}} ></span></a>
-          </div>
-          <hr>
-        </li>
-      </ul>
-      <div id="loading"><i class="fa fa-spinner fa-pulse"></i>&nbsp;&nbsp;loading...</div>
+  <div class="container taginfo-container" ng-controller="TaginfoCtrl as info">
+    <div class="page-header">
+      <h3>Tag info: 
+        <span class="label label-default"><span contenteditable="{{startEdit}}" id="tag-name">{{data.tag}}</span></span> <small ng-show="data.canEdit">
+        <a href="#" ng-class="{active:isActive}" ng-click="enableEdit()"><i class="fa fa-edit"></i> {{editText}}</a>
+        <a href="#" ng-class="{active:isSaved}" ng-click="save()"><i class="fa fa-save"></i> {{saveText}}</a></small></h3>
     </div>
-    <div class="col-lg-3"></div>
-  
-</div>
+    <div>
+      <h4>Abstract:</h4>
+      <div id="tag-abstract" contenteditable="{{startEdit}}" ng-class="{editing:startEdit}">
+        {{data.abstract}}
+      </div>
+    </div>
+    <div>
+      <h4>Information:</h4>
+      <div id="tag-intro" ng-bind-html="data.intro | unsafe" ng-class="{editing:startEdit}">
+      </div>
+    </div>
+  </div>
 	<!-- move to html files when fetching from the server -->
       <script type="text/ng-template" id="nav.html">
           <nav class="container">
@@ -52,7 +54,7 @@
                         <span class="input-group-btn">
                           <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
                         </span>
-                      </div><!-- /input-group -->
+                      </div>
                     </div>
                   </div>
             </div>

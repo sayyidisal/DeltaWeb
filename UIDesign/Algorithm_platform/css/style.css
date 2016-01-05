@@ -414,6 +414,43 @@ a.tag-link:last-child:after{
 #answer-modal .modal-body{
 	white-space: pre-line;
 }
+/*page:taginfo*/
+.taginfo-container h3>span{
+	margin-left: 15px;
+}
+.taginfo-container h4{
+	border-left: 2px solid #afca09;
+	padding-left: 10px;
+	margin-left: 20px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+.taginfo-container h4+div{
+	margin: 0 50px;
+	padding: 10px;
+	border-radius: 2px;
+}
+.taginfo-container h3 a{
+	position: relative;
+	top: 5px;
+	padding-left: 15px;
+	color: #999;
+}
+.taginfo-container h3 a.active{
+	color:#afca09;
+}
+.taginfo-container h3 small{
+	padding-left: 20px;
+}
+.taginfo-container div{
+	outline: none;
+}
+.taginfo-container div.editing{
+	background: #f6f6f6;
+}
+.taginfo-container span span{
+	outline-color: #afca09;
+}
 /*code display*/
 /*textarea line*/
 code{
