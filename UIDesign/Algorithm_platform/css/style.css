@@ -14,7 +14,7 @@ a:focus{
 	color: #afca09;
 	outline: none;
 }
-input,button,textarea{
+input,button,textarea,label{
 	outline: none;
 }
 #index-body{

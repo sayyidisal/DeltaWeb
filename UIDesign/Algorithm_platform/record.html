@@ -29,7 +29,7 @@
                              <button type="button" id="record-insert" ng-click="insertVariable(0)" class="btn btn-default">Insert variable</button>
                              <button type="button" id="record-options" class="btn btn-default" data-toggle="modal" data-target="#optionModal">Add options</button>
                              <button type="button" id="record-codes" class="btn btn-default"  data-toggle="modal" data-target="#codeModal">Add code</button>
-                            <button type="button" class="btn btn-default">Submit</button>
+                            <button type="button" class="btn btn-default" ng-click="submit()">Submit</button>
                           </div>
                     </div>
                     <div class="col-lg-4">
@@ -76,7 +76,7 @@
                 
                   <div class="col-lg-8">
                     <ul id="formula-container" class="form-control" ng-show="variables.length>0">
-                      <li ng-repeat="variable in variables"><span>a{{variable.index}}.</span><input type="text"></li>
+                      <li ng-repeat="variable in variables" id="formula-line{{variable.index}}"><span>a{{variable.index}}.</span><input type="text"></li>
                     </ul>
                   </div>
 

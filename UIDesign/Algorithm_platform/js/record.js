@@ -54,9 +54,9 @@
 						setTimeout(function() {
 							if (a != "" && b != "") {
 								if ($('#collapse' + index + " input").eq(0).parent().hasClass('active')) {
-									$('#formula-container li').eq(index - 1).find('input').val("a" + index + "= randomInt(" + a + "," + b + ");");
+									$('#formula-line'+index).find('input').val("a" + index + "= randomInt(" + a + "," + b + ");");
 								} else {
-									$('#formula-container li').eq(index - 1).find('input').val("a" + index + "= randomFloat(" + a + "," + b + ");");
+									$('#formula-line'+index).find('input').val("a" + index + "= randomFloat(" + a + "," + b + ");");
 								}
 							};
 						}, 20);
@@ -68,13 +68,11 @@
 
 		$scope.updateFormula = function(index) {
 			var inputs = document.getElementById('collapse' + index).getElementsByTagName('input'),
-				formulaInputs = document.getElementById('formula-container').getElementsByTagName('input'),
 				a = inputs[2].value.replace(/\s/g, ""),
 				b = inputs[3].value.replace(/\s/g, "");
-
 			if (a != "" && b != "") {
 				var variableType = inputs[0].value == "1" ? "Int" : "Float";
-				formulaInputs[index - 1].value = "a" + index + "= random" + variableType + "(" + a + "," + b + ");";
+				document.getElementById('formula-line'+index).getElementsByTagName('input')[0].value = "a" + index + "= random" + variableType + "(" + a + "," + b + ");";
 			};
 		}
 
@@ -98,7 +96,6 @@
 					if (e.keyCode == 46 || e.keyCode == 8) {
 						for (var i = 0; i < $('[data-panel-variable]').length; i++) {
 							if ($('#variable-label' + $('[data-panel-variable]').eq(i).attr('data-panel-variable')).text() != "") {
-
 							} else {
 								$scope.variables.splice(i, 1);
 								$scope.$apply();
@@ -110,6 +107,12 @@
 		}
 
 		$scope.deleteLabel();
+
+		$scope.submit = function () {
+			var recordData = {
+				title: document 
+			}
+		}
 
 	}]);
 
