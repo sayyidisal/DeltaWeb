@@ -18,3 +18,6 @@
 - insert before and insert compatibility. (probally can't fixed. There is no such Javascript API.)
 
 - save time minute display (fixed)
+- 
+
+3. Resposibility
