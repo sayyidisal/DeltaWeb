@@ -40,7 +40,6 @@
 			$scope.isActive = true;
 			$scope.startEdit = true;
 			$scope.editText = "editing";
-			var editor = new Minislate.simpleEditor(document.getElementById('tag-intro'));
 		};
 
 		$scope.save = function() {
@@ -55,7 +54,7 @@
 			// to be removed
 
 			var d = new Date();
-			$scope.saveText = "saved at " + d.getHours() + ":" + d.getMinutes();
+			$scope.saveText = "saved at " + d.getHours() + ":"+(d.getMinutes()<10?'0':"")+ d.getMinutes();
 
 			// replaced with
 			// $http({
@@ -71,7 +70,7 @@
 			// 			$scope.saveText = "not saved";
 			// 		} else {
 			//			var d = new Date();
-			// 			$scope.saveText = "saved at " + d.getHours() + ":" + d.getMinutes();
+			// 			$scope.saveText = "saved at " + d.getHours() + ":" + (d.getMinutes()<10?'0':"")+ d.getMinutes();
 			// 		}
 			// 	});
 
@@ -84,3 +83,10 @@
 	})
 
 })()
+
+// not sure why those error messages on console, although it doesn't affect the way it works.
+jQuery(document).ready(function($) {
+	$('#editing').one('click', function(event) {
+		var editor = new Minislate.simpleEditor(document.getElementById('tag-intro'));
+	});
+});

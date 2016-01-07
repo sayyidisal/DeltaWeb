@@ -25,7 +25,7 @@
 
 		$scope.removeVariable = function(index) {
 			for (var i = 0; i < $scope.variables.length; i++) {
-				if($scope.variables[i].index==index){
+				if ($scope.variables[i].index == index) {
 					$scope.variables.splice(i, 1);
 				}
 			};
@@ -40,30 +40,27 @@
 				index: $scope.counter,
 				val: "",
 			})
-			replaceSelectionWithHtml("&nbsp;<span class='label label-success' contenteditable='false' id='variable-label" + $scope.counter + "'>a" + $scope.counter + "</span>&nbsp;");
-			// not sure whether can be turned into angular js
-			$(function() {
-				$('.collapse').removeClass('in');
-				setTimeout(function() {
-					$('[data-variable]').unbind('click').click(function(event) {
-						var labelClass = $scope.classType[parseInt($(this).attr('data-checked')) - 1];
-						$('#variable-label' + $(this).attr('data-variable')).attr('class', 'label label-' + labelClass);
-						index = parseInt($(this).attr('data-variable'));
-						var a = $('#collapse' + index + " input").eq(2).val().replace(/\s/g, ""),
-							b = $('#collapse' + index + " input").eq(3).val().replace(/\s/g, "");
-						setTimeout(function() {
-							if (a != "" && b != "") {
-								if ($('#collapse' + index + " input").eq(0).parent().hasClass('active')) {
-									$('#formula-line'+index).find('input').val("a" + index + "= randomInt(" + a + "," + b + ");");
-								} else {
-									$('#formula-line'+index).find('input').val("a" + index + "= randomFloat(" + a + "," + b + ");");
-								}
-							};
-						}, 20);
-					});
-				}, 20);
-
-			});
+			replaceSelectionWithHtml("&nbsp;<span class='label label-success noselect' contenteditable='false' id='variable-label" + $scope.counter + "'>a" + $scope.counter + "</span>&nbsp;");
+			//jquery involved
+			$('.collapse').removeClass('in');
+			setTimeout(function() {
+				$('[data-variable]').unbind('click').click(function(event) {
+					var labelClass = $scope.classType[parseInt($(this).attr('data-checked')) - 1];
+					$('#variable-label' + $(this).attr('data-variable')).attr('class', 'label label-' + labelClass);
+					index = parseInt($(this).attr('data-variable'));
+					var a = $('#collapse' + index + " input").eq(2).val().replace(/\s/g, ""),
+						b = $('#collapse' + index + " input").eq(3).val().replace(/\s/g, "");
+					setTimeout(function() {
+						if (a != "" && b != "") {
+							if ($('#collapse' + index + " input").eq(0).parent().hasClass('active')) {
+								$('#formula-line' + index).find('input').val("a" + index + "= randomInt(" + a + "," + b + ");");
+							} else {
+								$('#formula-line' + index).find('input').val("a" + index + "= randomFloat(" + a + "," + b + ");");
+							}
+						};
+					}, 20);
+				});
+			}, 20);
 		}
 
 		$scope.updateFormula = function(index) {
@@ -72,7 +69,7 @@
 				b = inputs[3].value.replace(/\s/g, "");
 			if (a != "" && b != "") {
 				var variableType = inputs[0].value == "1" ? "Int" : "Float";
-				document.getElementById('formula-line'+index).getElementsByTagName('input')[0].value = "a" + index + "= random" + variableType + "(" + a + "," + b + ");";
+				document.getElementById('formula-line' + index).getElementsByTagName('input')[0].value = "a" + index + "= random" + variableType + "(" + a + "," + b + ");";
 			};
 		}
 
@@ -91,26 +88,22 @@
 		}
 
 		$scope.deleteLabel = function() {
-			$(function() {
-				$('#record-editor').keyup(function(e) {
-					if (e.keyCode == 46 || e.keyCode == 8) {
-						for (var i = 0; i < $('[data-panel-variable]').length; i++) {
-							if ($('#variable-label' + $('[data-panel-variable]').eq(i).attr('data-panel-variable')).text() != "") {
-							} else {
-								$scope.variables.splice(i, 1);
-								$scope.$apply();
-							}
-						};
+			//jquery involved
+			$("#record-editor").on("input", function() {
+				for (var i = 0; i < $('[data-panel-variable]').length; i++) {
+					if ($('#variable-label' + $('[data-panel-variable]').eq(i).attr('data-panel-variable')).text() != "") {} else {
+						$scope.variables.splice(i, 1);
+						$scope.$apply();
 					}
-				});
-			})
+				};
+			});
 		}
 
 		$scope.deleteLabel();
 
-		$scope.submit = function () {
+		$scope.submit = function() {
 			var recordData = {
-				title: document 
+				title: document
 			}
 		}
 
