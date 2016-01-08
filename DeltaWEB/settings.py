@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account',
+    'question',
     'simple_history'
 )
 
@@ -84,7 +85,7 @@ DATABASES = {
         'NAME': 'delta',
         'USER': 'mysql_admin',
         'PASSWORD': 'development',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
