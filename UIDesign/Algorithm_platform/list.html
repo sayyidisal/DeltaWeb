@@ -2,15 +2,16 @@
 <html ng-app="platform-list">
 <head>
 	<meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search result</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-  <script src="js/list.js"></script>
-	<title>Search result</title>
 </head>
 <body>
 	<nav-bar></nav-bar>
@@ -40,7 +41,7 @@
     </div>
 
 </div>
-	<!-- move to html files when fetching from the server -->
+	<!-- move to html files when fetching from the server and delete this part-->
       <script type="text/ng-template" id="nav.html">
           <nav class="container">
             <div id="nav-container">
@@ -65,5 +66,9 @@
             </div>
           </nav>
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list.js"></script>
 </body>
 </html>
