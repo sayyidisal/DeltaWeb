@@ -1,8 +1,9 @@
 (function() {
 
 	userInfo = {
+		success:true,
 		loginAs: 0, //0 as not login, 1 as student, 2 as instructor
-		username: "Wei",
+		username: "",
 		errors: {
 			errorName: true,
 			errorEmail: true,
@@ -63,18 +64,15 @@
 
 					if (!data.success) {
 						// if not successful, bind errors to error variables
-						$scope.errorName = data.errors.name; //true if user has been taken
-						$scope.errorEmail = data.errors.email; //true if email has been registered
+						$scope.errorName = data.errors.errorName; //true if user has been taken
+						$scope.errorEmail = data.errors.errorEmail; //true if email has been registered
 						// pass true, error message will show accordingly
 
 					} else {
-						// if success, update user data and apply
+
 						$rootScope.info = data;
-						$rootScope.$digest();
-						// to be changed
-						$(function() {
-							$('#signupModal').modal('hide');
-						})
+						$('#signupModal').modal('hide');
+
 					}
 				});
 		};
@@ -108,10 +106,7 @@
 					} else {
 						// if success, update user data and apply
 						$rootScope.info = data;
-						$rootScope.$digest();
-						$(function() {
-							$('#loginModal').modal('hide');
-						})
+						$('#loginModal').modal('hide');
 					}
 
 				});
