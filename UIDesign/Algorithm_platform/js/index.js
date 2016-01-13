@@ -84,7 +84,7 @@
 		$scope.formData = {};
 		$scope.errorAuthen = false;
 
-		$scope.loginForm = function() {
+		$scope.submitForm = function() {
 			$scope.formData = {
 				usename: document.getElementById('l-username').value,
 				password: document.getElementById('l-password').value,
