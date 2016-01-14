@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/pen.css">
+  <link rel="stylesheet" href="css/minislate.css">
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -31,7 +31,7 @@
     </div>
     <div>
       <h4>Information:</h4>
-      <div id="tag-intro" ng-bind-html="introContent | unsafe" ng-class="{editing:startEdit}">
+      <div id="tag-intro" ng-bind-html="data.intro | unsafe" ng-class="{editing:startEdit}">
       </div>
     </div>
   </div>
@@ -63,9 +63,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/pen.js"></script>
-    <script src="js/markdown.js"></script>
-    <script type="text/javascript" src="https://rawgit.com/showdownjs/showdown/develop/dist/showdown.min.js"></script>
+    <script src="js/minislate.js"></script>
     <script src="js/tag.js"></script>
 </body>
 </html>

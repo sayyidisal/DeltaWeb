@@ -86,7 +86,7 @@
 
 		$scope.submitForm = function() {
 			$scope.formData = {
-				username: document.getElementById('l-username').value,
+				usename: document.getElementById('l-username').value,
 				password: document.getElementById('l-password').value,
 			};
 			$http({
