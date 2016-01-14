@@ -23,8 +23,17 @@
 			canEdit: true,
 			tag: "JavaScript",
 			abstract: "JavaScript (not to be confused with Java) is a dynamic, weakly-typed language used for client-side as well as server-side scripting. Use this tag for questions regarding ECMAScript and its various dialects/implementations (excluding ActionScript and Google-Apps-Script). Unless another tag for a framework/library is also included, a pure JavaScript answer is expected.",
-			intro: "<p><b>JavaScript</b> is a dynamic, object-based, prototype-based, weakly typed language traditionally used for client-side scripting in web browsers. javascript can also be run outside of the browser with the use of a framework like . Despite the name, it is unrelated to the Java programming language and shares only superficial similarities.&nbsp;</p><blockquote><p>Unless a tag for a framework or library is also included, a pure JavaScript answer is expected for questions with the tag.</p></blockquote>",
+			intro: "**JavaScript** is a dynamic, object-based, prototype-based, weakly typed language traditionally used for client-side scripting in web browsers. javascript can also be run outside of the browser with the use of a framework like . Despite the name, it is unrelated to the Java programming language and shares only superficial similarities.&nbsp;\n\
+>Unless a tag for a framework or library is also included, a pure JavaScript answer is expected for questions with the tag."
 		};
+
+		var converter = new showdown.Converter(),
+			text = $scope.data.intro,
+			html = converter.makeHtml(text);
+
+		//convert markdown as html
+
+		$scope.introContent = html;
 
 		$scope.startEdit = false;
 
@@ -42,19 +51,32 @@
 			$scope.editText = "editing";
 		};
 
+		var editor;
+
+		$('#editing').one('click', function(event) {
+			var defaults = {
+				editor: document.getElementById('tag-intro'),
+				debug: false,
+				list: [
+					'blockquote', 'h2', 'h3', 'p', 'insertorderedlist', 'insertunorderedlist',
+					'indent', 'outdent', 'bold', 'italic', 'underline', 'createlink'
+				],
+				stay: false
+			}
+			editor = new Pen(defaults);
+		});
+
 		$scope.save = function() {
 			$scope.isSaved = true;
 
 			var tagInfo = {
 				tag: document.getElementById('tag-name').innerHTML,
 				abstract: document.getElementById('tag-abstract').innerHTML,
-				intro: document.getElementById('tag-intro').innerHTML,
+				intro: editor.toMd(), //stored as markdown 
 			};
 
-			// to be removed
-
 			var d = new Date();
-			$scope.saveText = "saved at " + d.getHours() + ":"+(d.getMinutes()<10?'0':"")+ d.getMinutes();
+			$scope.saveText = "saved at " + d.getHours() + ":" + (d.getMinutes() < 10 ? '0' : "") + d.getMinutes();
 
 			// replaced with
 			// $http({
@@ -86,7 +108,5 @@
 
 // not sure why those error messages on console, although it doesn't affect the way it works.
 jQuery(document).ready(function($) {
-	$('#editing').one('click', function(event) {
-		var editor = new Minislate.simpleEditor(document.getElementById('tag-intro'));
-	});
+	$('[data-toggle="tooltip"]').tooltip();
 });

@@ -147,3 +147,7 @@ function setSelectionRange(input, selectionStart, selectionEnd) {
 		this.selectionEnd = selectionEnd;
 	}
 }
+
+jQuery(document).ready(function($) {
+	$('[data-toggle="tooltip"]').tooltip();
+});
