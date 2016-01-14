@@ -112,6 +112,9 @@
 })()
 
 // utility functions
+jQuery(document).ready(function($) {
+	$('[data-toggle="tooltip"]').tooltip();
+});
 
 function replaceSelectionWithHtml(html) {
 	var range, html;

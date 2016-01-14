@@ -397,6 +397,9 @@ box-shadow: 5px 5px 5px 1px rgba(175,202,9,0.48);
 #question-container h3 small{
 	padding-left: 10px;
 }
+#question-content div{
+	margin-top: 20px;
+}
 a.tag-link{
 	padding:0 5px;
 }
