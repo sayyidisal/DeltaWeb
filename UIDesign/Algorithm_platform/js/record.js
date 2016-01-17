@@ -101,6 +101,14 @@
 
 		$scope.deleteLabel();
 
+		$scope.addFormula = function () {
+			$('#add-formula').parent().before('<li><span></span><input type="text"></li>');
+		}
+		
+		// $scope.addFormula2 = function () {
+		// 	$('#add-formula2').parent().before('<li><span></span><input type="text"></li>');
+		// }
+
 		$scope.submit = function() {
 			var doneVariables = [],
 				generators = [],
@@ -108,8 +116,8 @@
 			for (var i = 0; i < $scope.variables.length; i++) {
 				doneVariables.push(($scope.variables[i].type == 1 ? "integer" : "floating") + " a" + $scope.variables[i].index)
 			};
-			for (var i = 0; i < $('#formula-container li').length; i++) {
-				generators.push($('#formula-container li').eq(i).find('input').val());
+			for (var i = 0; i < $('#formula-container1 li').length; i++) {
+				generators.push($('#formula-container1 li').eq(i).find('input').val());
 			};
 			for (var i = 0; i < $('#optionModal input').length; i++) {
 				options.push($('#optionModal input').eq(i).val());
@@ -120,7 +128,7 @@
 				"PROBLEM": {
 					"VARIABLE": doneVariables,
 					"GENERATOR": generators,
-					"BODY": $('#record-editor').html().replace(/<[^>]*>/g, '$')
+					"BODY": $('#record-editor').html().replace(/<[^>]*>/g, '$').replace(/&nbsp;/g,'')
 				},
 				"ORIGINAL_PROBLEM": $('#origin-textarea').val(),
 				"OPTION": options,
