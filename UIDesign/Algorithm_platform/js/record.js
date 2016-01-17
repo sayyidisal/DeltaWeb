@@ -18,7 +18,7 @@
 		};
 	}])
 
-	.controller('RecordCtrl', ['$scope', function($scope) {
+	.controller('RecordCtrl', ['$http','$scope', function($http,$scope) {
 		$scope.variables = [];
 		$scope.classType = ["success", "primary", "warning"];
 		$scope.counter = 0;
@@ -102,9 +102,45 @@
 		$scope.deleteLabel();
 
 		$scope.submit = function() {
+			var doneVariables = [],
+				generators = [],
+				options = [];
+			for (var i = 0; i < $scope.variables.length; i++) {
+				doneVariables.push(($scope.variables[i].type == 1 ? "integer" : "floating") + " a" + $scope.variables[i].index)
+			};
+			for (var i = 0; i < $('#formula-container li').length; i++) {
+				generators.push($('#formula-container li').eq(i).find('input').val());
+			};
+			for (var i = 0; i < $('#optionModal input').length; i++) {
+				options.push($('#optionModal input').eq(i).val());
+			};
 			var recordData = {
-				title: document
-			}
+				"TITLE": $('#record-title-edit').text(),
+				"TAGS": $('#tag-input').val().split(";"),
+				"PROBLEM": {
+					"VARIABLE": doneVariables,
+					"GENERATOR": generators,
+					"BODY": $('#record-editor').html(),
+				},
+				"ORIGINAL_PROBLEM": $('#origin-textarea').val(),
+				"OPTION": options,
+				"ANSWER": $('#answer-textarea').val(),
+				"CODE": $('#codeModal textarea').val(),
+				"TYPE": 1
+			};
+			$http({
+					method: 'POST',
+					url: 'recordProcess', // to be changed
+					data: $.param(recordData), // pass in data as strings
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					} // set the headers so angular passing info as form data (not request payload)
+				})
+				.success(function(data) {
+
+					// dosomething with the data?
+
+				});
 		}
 
 	}]);
