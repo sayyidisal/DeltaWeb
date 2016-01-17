@@ -120,7 +120,7 @@
 				"PROBLEM": {
 					"VARIABLE": doneVariables,
 					"GENERATOR": generators,
-					"BODY": $('#record-editor').html(),
+					"BODY": $('#record-editor').html().replace(/<[^>]*>/g, '$')
 				},
 				"ORIGINAL_PROBLEM": $('#origin-textarea').val(),
 				"OPTION": options,
@@ -128,19 +128,20 @@
 				"CODE": $('#codeModal textarea').val(),
 				"TYPE": 1
 			};
-			$http({
-					method: 'POST',
-					url: 'recordProcess', // to be changed
-					data: $.param(recordData), // pass in data as strings
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					} // set the headers so angular passing info as form data (not request payload)
-				})
-				.success(function(data) {
+			console.log(recordData);
+			// $http({
+			// 		method: 'POST',
+			// 		url: 'recordProcess', // to be changed
+			// 		data: $.param(recordData), // pass in data as strings
+			// 		headers: {
+			// 			'Content-Type': 'application/x-www-form-urlencoded'
+			// 		} // set the headers so angular passing info as form data (not request payload)
+			// 	})
+			// 	.success(function(data) {
 
-					// dosomething with the data?
+			// 		// dosomething with the data?
 
-				});
+			// 	});
 		}
 
 	}]);
