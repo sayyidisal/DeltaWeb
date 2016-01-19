@@ -120,7 +120,7 @@
 			for (var i = 0; i < $scope.variables.length; i++) {
 				doneVariables.push(($scope.variables[i].type == 1 ? "integer" : "floating") + " a" + $scope.variables[i].index)
 			};
-			for (var i = 0; i < $('#formula-container1 li').length; i++) {
+			for (var i = 0; i < $('#formula-container1 li').length-1; i++) {
 				generators.push($('#formula-container1 li').eq(i).find('input').val());
 			};
 			for (var i = 0; i < $('#optionModal input').length; i++) {
@@ -140,7 +140,7 @@
 				"CODE": $('#codeModal textarea').val(),
 				"TYPE": 1
 			};
-			console.log(recordData);
+			// console.log(recordData);
 			// $http({
 			// 		method: 'POST',
 			// 		url: 'recordProcess', // to be changed
