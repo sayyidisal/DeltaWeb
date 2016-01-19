@@ -22,7 +22,6 @@
 		$scope.variables = [];
 		$scope.classType = ["success", "primary", "warning"];
 		$scope.counter = 0;
-		$scope.supportingCounter = 0;
 
 		$scope.removeVariable = function(index) {
 			for (var i = 0; i < $scope.variables.length; i++) {
@@ -54,9 +53,9 @@
 					setTimeout(function() {
 						if (a != "" && b != "") {
 							if ($('#collapse' + index + " input").eq(0).parent().hasClass('active')) {
-								$('#formula-line' + index).find('input').val("randomInt(" + a + "," + b + ");");
+								$('#formula-line' + index).find('input').val("a" + index + "= randomInt(" + a + "," + b + ");");
 							} else {
-								$('#formula-line' + index).find('input').val("randomFloat(" + a + "," + b + ");");
+								$('#formula-line' + index).find('input').val("a" + index + "= randomFloat(" + a + "," + b + ");");
 							}
 						};
 					}, 20);
@@ -103,8 +102,7 @@
 		$scope.deleteLabel();
 
 		$scope.addFormula = function () {
-			$scope.supportingCounter++;
-			$('#add-formula').parent().before('<li><span>b'+$scope.supportingCounter+'</span><input type="text"></li>');
+			$('#add-formula').parent().before('<li><span></span><input type="text"></li>');
 		}
 		
 		// $scope.addFormula2 = function () {
@@ -118,8 +116,8 @@
 			for (var i = 0; i < $scope.variables.length; i++) {
 				doneVariables.push(($scope.variables[i].type == 1 ? "integer" : "floating") + " a" + $scope.variables[i].index)
 			};
-			for (var i = 0; i < $('#formula-container1 li').length-1; i++) {
-				generators.push($('#formula-container1 li').eq(i).find('span').text()+"="+$('#formula-container1 li').eq(i).find('input').val());
+			for (var i = 0; i < $('#formula-container1 li').length; i++) {
+				generators.push($('#formula-container1 li').eq(i).find('input').val());
 			};
 			for (var i = 0; i < $('#optionModal input').length; i++) {
 				options.push($('#optionModal input').eq(i).val());
@@ -138,7 +136,7 @@
 				"CODE": $('#codeModal textarea').val(),
 				"TYPE": 1
 			};
-			// console.log(recordData);
+			console.log(recordData);
 			// $http({
 			// 		method: 'POST',
 			// 		url: 'recordProcess', // to be changed

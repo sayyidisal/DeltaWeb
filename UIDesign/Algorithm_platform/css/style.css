@@ -26,8 +26,7 @@ body{
 body::after {
   content: "";
   background: url(../img/bg_bright.png);
-  /*background-repeat: repeat-y;*/
-  background-size: auto 100%;
+  background-repeat: repeat-y;
   opacity: 0.3;
   top: 0;
   left: 0;
