@@ -41,9 +41,8 @@
 				val: "",
 				isHidden: isHidden
 			})
-
-			if (isHidden!=1) {
-				replaceSelectionWithHtml("&nbsp;<span class='label label-success noselect' contenteditable='false' id='variable-label" + $scope.counter + "'>a" + $scope.counter + "</span>&nbsp;");
+			if (isHidden!=1) {		
+				replaceSelectionWithHtml("&nbsp;<span class='label label-success noselect' contenteditable='false' id='variable-label" + $scope.counter + "'>a" + $scope.counter + "</span>&nbsp;");		
 			};
 			//jquery involved
 			$('.collapse').removeClass('in');
@@ -57,9 +56,9 @@
 					setTimeout(function() {
 						if (a != "" && b != "") {
 							if ($('#collapse' + index + " input").eq(0).parent().hasClass('active')) {
-								$('#formula-line' + index).find('input').val("randomInt(" + a + "," + b + ");");
+								$('#formula-line' + index).find('input').val("RandomPackage.randomNum(" + a + "," + b + ");");
 							} else {
-								$('#formula-line' + index).find('input').val("randomFloat(" + a + "," + b + ");");
+								$('#formula-line' + index).find('input').val("RandomPackage.randomFloat(" + a + "," + b + ");");
 							}
 						};
 					}, 20);
@@ -72,8 +71,8 @@
 				a = inputs[2].value.replace(/\s/g, ""),
 				b = inputs[3].value.replace(/\s/g, "");
 			if (a != "" && b != "") {
-				var variableType = inputs[0].value == "1" ? "Int" : "Float";
-				document.getElementById('formula-line' + index).getElementsByTagName('input')[0].value = "random" + variableType + "(" + a + "," + b + ");";
+				var variableType = inputs[0].value == "1" ? "Num" : "Float";
+				document.getElementById('formula-line' + index).getElementsByTagName('input')[0].value = "RandomPackage.random" + variableType + "(" + a + "," + b + ");";
 			};
 		}
 
@@ -104,13 +103,13 @@
 		}
 
 		$scope.deleteLabel();
-
-		$scope.addFormula = function () {
-			$('#add-formula').parent().before('<li><span></span><input type="text"></li>');
-		}
 		
-		// $scope.addFormula2 = function () {
-		// 	$('#add-formula2').parent().before('<li><span></span><input type="text"></li>');
+		$scope.addFormula = function () {		
+			$('#add-formula').parent().before('<li><span></span><input type="text"></li>');		
+		}		
+				
+		// $scope.addFormula2 = function () {		
+		// 	$('#add-formula2').parent().before('<li><span></span><input type="text"></li>');		
 		// }
 
 		$scope.submit = function() {
@@ -120,7 +119,7 @@
 			for (var i = 0; i < $scope.variables.length; i++) {
 				doneVariables.push(($scope.variables[i].type == 1 ? "integer" : "floating") + " a" + $scope.variables[i].index)
 			};
-			for (var i = 0; i < $('#formula-container1 li').length-1; i++) {
+			for (var i = 0; i < $('#formula-container1 li').length - 1; i++) {
 				generators.push($('#formula-container1 li').eq(i).find('input').val());
 			};
 			for (var i = 0; i < $('#optionModal input').length; i++) {
@@ -132,15 +131,15 @@
 				"PROBLEM": {
 					"VARIABLE": doneVariables,
 					"GENERATOR": generators,
-					"BODY": $('#record-editor').html().replace(/<[^>]*>/g, '$').replace(/&nbsp;/g,'')
+					"BODY": $('#record-editor').html().replace(/<[^>]*>/g, '$').replace(/&nbsp;/g,''),
+					"ANSWER": $('#answer-textarea').val()
 				},
 				"ORIGINAL_PROBLEM": $('#origin-textarea').val(),
 				"OPTION": options,
-				"ANSWER": $('#answer-textarea').val(),
 				"CODE": $('#codeModal textarea').val(),
 				"TYPE": 1
 			};
-			// console.log(recordData);
+			console.log(recordData);
 			// $http({
 			// 		method: 'POST',
 			// 		url: 'recordProcess', // to be changed
