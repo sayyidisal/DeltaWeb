@@ -311,8 +311,8 @@ box-shadow: 5px 5px 5px 1px rgba(175,202,9,0.48);
 	left: -7px;
 }
 .formula-container li input{
-	width: 98%;
-	margin-left: 10px;
+	width: 95%;
+	margin-left: 25px;
 	border: none;
 	border-bottom: 1px solid #bbb;
 	margin-right: 15px;

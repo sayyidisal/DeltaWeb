@@ -32,15 +32,19 @@
 			document.getElementById('variable-label' + index).remove();
 		}
 
-		$scope.insertVariable = function() {
+		$scope.insertVariable = function(isHidden) {
 			document.getElementById('record-editor').focus();
 			$scope.counter += 1;
 			this.variables.push({
 				type: 1,
 				index: $scope.counter,
 				val: "",
+				isHidden: isHidden
 			})
-			replaceSelectionWithHtml("&nbsp;<span class='label label-success noselect' contenteditable='false' id='variable-label" + $scope.counter + "'>a" + $scope.counter + "</span>&nbsp;");
+
+			if (isHidden!=1) {
+				replaceSelectionWithHtml("&nbsp;<span class='label label-success noselect' contenteditable='false' id='variable-label" + $scope.counter + "'>a" + $scope.counter + "</span>&nbsp;");
+			};
 			//jquery involved
 			$('.collapse').removeClass('in');
 			setTimeout(function() {
@@ -53,9 +57,9 @@
 					setTimeout(function() {
 						if (a != "" && b != "") {
 							if ($('#collapse' + index + " input").eq(0).parent().hasClass('active')) {
-								$('#formula-line' + index).find('input').val("a" + index + "= randomInt(" + a + "," + b + ");");
+								$('#formula-line' + index).find('input').val("randomInt(" + a + "," + b + ");");
 							} else {
-								$('#formula-line' + index).find('input').val("a" + index + "= randomFloat(" + a + "," + b + ");");
+								$('#formula-line' + index).find('input').val("randomFloat(" + a + "," + b + ");");
 							}
 						};
 					}, 20);
@@ -69,7 +73,7 @@
 				b = inputs[3].value.replace(/\s/g, "");
 			if (a != "" && b != "") {
 				var variableType = inputs[0].value == "1" ? "Int" : "Float";
-				document.getElementById('formula-line' + index).getElementsByTagName('input')[0].value = "a" + index + "= random" + variableType + "(" + a + "," + b + ");";
+				document.getElementById('formula-line' + index).getElementsByTagName('input')[0].value = "random" + variableType + "(" + a + "," + b + ");";
 			};
 		}
 
