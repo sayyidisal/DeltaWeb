@@ -116,6 +116,8 @@
 			var doneVariables = [],
 				generators = [],
 				options = [];
+			var editor=$('#record-editor').clone();
+			editor.find('div').remove();
 			for (var i = 0; i < $scope.variables.length; i++) {
 				doneVariables.push(($scope.variables[i].type == 1 ? "integer" : "floating") + " a" + $scope.variables[i].index)
 			};
@@ -131,7 +133,7 @@
 				"PROBLEM": {
 					"VARIABLE": doneVariables,
 					"GENERATOR": generators,
-					"BODY": $('#record-editor').html().replace(/<[^>]*>/g, '$').replace(/&nbsp;/g,''),
+					"BODY": editor.html().replace(/<[^>]*>/g, '$').replace(/&nbsp;/g,''),
 					"ANSWER": $('#answer-textarea').val()
 				},
 				"ORIGINAL_PROBLEM": $('#origin-textarea').val(),
