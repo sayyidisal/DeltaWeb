@@ -18,13 +18,24 @@
 		};
 	}])
 
-	.controller('TaginfoCtrl', ['$scope', function($scope) {
+	.controller('TaginfoCtrl', ['$http', '$scope', function($http, $scope) {
+
+		var paths = location.pathname.split('/');
+
 		$scope.data = {
-			canEdit: false,
-			tag: "JavaScript",
-			abstract: "JavaScript (not to be confused with Java) is a dynamic, weakly-typed language used for client-side as well as server-side scripting. Use this tag for questions regarding ECMAScript and its various dialects/implementations (excluding ActionScript and Google-Apps-Script). Unless another tag for a framework/library is also included, a pure JavaScript answer is expected.",
-			intro: "<p><b>JavaScript</b> is a dynamic, object-based, prototype-based, weakly typed language traditionally used for client-side scripting in web browsers. javascript can also be run outside of the browser with the use of a framework like . Despite the name, it is unrelated to the Java programming language and shares only superficial similarities.&nbsp;</p><blockquote><p>Unless a tag for a framework or library is also included, a pure JavaScript answer is expected for questions with the tag.</p></blockquote>",
+			isNew: false,
+			canEdit: true,
+			tag: paths[paths.length - 1],
+			abstract: "add abstract",
+			intro: "add introduction"
 		};
+
+		// $http.get('/getTag/' + paths[paths.length - 1]).success(function(data) {
+		// 	if (data) {
+		// 		// console.log(data);
+		// 		$scope.data = data;
+		// 	};
+		// })
 
 		$scope.startEdit = false;
 
@@ -37,40 +48,59 @@
 		$scope.isSaved = false;
 
 		$scope.enableEdit = function() {
-			$scope.isActive = true;
-			$scope.startEdit = true;
-			$scope.editText = "editing";
+			if (!$scope.startEdit) {
+				$scope.isActive = true;
+				$scope.startEdit = true;
+				$scope.editText = "editing";
+				var editor = new Minislate.simpleEditor(document.getElementById('tag-intro'));
+			};
 		};
 
 		$scope.save = function() {
+			if (document.getElementById('tag-name').innerHTML.trim() == "new") {
+				alert("Please change the tag name before save;")
+				return null;
+			};
+
 			$scope.isSaved = true;
 
 			var tagInfo = {
-				tag: document.getElementById('tag-name').innerHTML,
+				tag: $scope.data.isNew ? document.getElementById('tag-name').innerHTML : $scope.data.tag,
 				abstract: document.getElementById('tag-abstract').innerHTML,
 				intro: document.getElementById('tag-intro').innerHTML,
 			};
 
 			// to be removed
-
+			var url = window.location.href,
+				nowPath = url.split("/"),
+				newUrl = url.replace(nowPath[nowPath.length - 1], tagInfo.tag);
+			history.pushState('', tagInfo.tag, newUrl);
 			var d = new Date();
-			$scope.saveText = "saved at " + d.getHours() + ":"+(d.getMinutes()<10?'0':"")+ d.getMinutes();
+			$scope.saveText = "saved at " + d.getHours() + ":" + (d.getMinutes() < 10 ? '0' : "") + d.getMinutes();
 
 			// replaced with
 			// $http({
 			// 		method: 'POST',
-			// 		url: 'saveTagProcess', 
-			// 		data: $.param(tagInfo), 
+			// 		url: '/saveTag',
+			// 		data: $.param(tagInfo),
 			// 		headers: {
 			// 			'Content-Type': 'application/x-www-form-urlencoded'
-			// 		} 
+			// 		},
+			// 		xhrFields: {
+			// 			withCredentials: true
+			// 		}
 			// 	})
 			// 	.success(function(data) {
 			// 		if (!data.success) {
 			// 			$scope.saveText = "not saved";
 			// 		} else {
-			//			var d = new Date();
-			// 			$scope.saveText = "saved at " + d.getHours() + ":" + (d.getMinutes()<10?'0':"")+ d.getMinutes();
+			// 			//dynamic change the title
+			// 			var url = window.location.href,
+			// 				nowPath = url.split("/"),
+			// 				newUrl = url.replace(nowPath[nowPath.length - 1], tagInfo.tag);
+			// 			history.pushState('', tagInfo.tag, newUrl);
+			// 			var d = new Date();
+			// 			$scope.saveText = "saved at " + d.getHours() + ":" + (d.getMinutes() < 10 ? '0' : "") + d.getMinutes();
 			// 		}
 			// 	});
 
@@ -80,14 +110,6 @@
 
 	.filter('unsafe', function($sce) {
 		return $sce.trustAsHtml;
-	})
+	});
 
 })()
-
-// not sure why those error messages on console, although it doesn't affect the way it works.
-jQuery(document).ready(function($) {
-	$('[data-toggle="tooltip"]').tooltip();
-	$('#editing').one('click', function(event) {
-		var editor = new Minislate.simpleEditor(document.getElementById('tag-intro'));
-	});
-});
