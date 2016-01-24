@@ -18,7 +18,7 @@
 		};
 	}])
 
-	.controller('RecordCtrl', ['$http','$scope', function($http,$scope) {
+	.controller('RecordCtrl', ['$http', '$scope', function($http, $scope) {
 		$scope.variables = [];
 		$scope.classType = ["success", "primary", "warning"];
 		$scope.counter = 0;
@@ -41,8 +41,8 @@
 				val: "",
 				isHidden: isHidden
 			})
-			if (isHidden!=1) {		
-				replaceSelectionWithHtml("&nbsp;<span class='label label-success noselect' contenteditable='false' id='variable-label" + $scope.counter + "'>a" + $scope.counter + "</span>&nbsp;");		
+			if (isHidden != 1) {
+				replaceSelectionWithHtml("&nbsp;<span class='label label-success noselect' contenteditable='false' id='variable-label" + $scope.counter + "'>a" + $scope.counter + "</span>&nbsp;");
 			};
 			//jquery involved
 			$('.collapse').removeClass('in');
@@ -103,11 +103,11 @@
 		}
 
 		$scope.deleteLabel();
-		
-		$scope.addFormula = function () {		
-			$('#add-formula').parent().before('<li><span></span><input type="text"></li>');		
-		}		
-				
+
+		$scope.addFormula = function() {
+			$('#add-formula').parent().before('<li><span></span><input type="text"></li>');
+		}
+
 		// $scope.addFormula2 = function () {		
 		// 	$('#add-formula2').parent().before('<li><span></span><input type="text"></li>');		
 		// }
@@ -115,9 +115,14 @@
 		$scope.submit = function() {
 			var doneVariables = [],
 				generators = [],
-				options = [];
-			var editor=$('#record-editor').clone();
-			editor.find('div').remove();
+				options = [],
+				txt = '',
+				editor = $('#record-editor').clone(),
+				len = editor.find('span.label').length;
+			for (var i = 0; i < len; i++) {
+				txt = "$" + editor.find('span.label').eq(0).text() + "$";
+				editor.find('span.label').eq(0).replaceWith(txt);
+			};
 			for (var i = 0; i < $scope.variables.length; i++) {
 				doneVariables.push(($scope.variables[i].type == 1 ? "integer" : "floating") + " a" + $scope.variables[i].index)
 			};
@@ -133,7 +138,7 @@
 				"PROBLEM": {
 					"VARIABLE": doneVariables,
 					"GENERATOR": generators,
-					"BODY": editor.html().replace(/<[^>]*>/g, '$').replace(/&nbsp;/g,''),
+					"BODY": editor.html().replace(/&nbsp;/g, ''),
 					"ANSWER": $('#answer-textarea').val()
 				},
 				"ORIGINAL_PROBLEM": $('#origin-textarea').val(),
