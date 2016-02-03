@@ -9,7 +9,8 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">  
+  <link rel="stylesheet" href="css/JSAV.css">
   <link rel="stylesheet" href="css/min/style.min.css">
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
@@ -21,7 +22,11 @@
     </div>
     <div id="question-content" class="monokai">
       <p>{{question.content}}</p>
-      <code class="prettyprint linenums">{{question.code}}</code>     
+      <code class="prettyprint linenums">{{question.code}}</code> 
+       <div id="av">
+      <div class="jsavcontrols"></div><span class="jsavcounter"></span>
+      <p class="jsavoutput jsavline"></p>
+    </div>    
       <div class="btn-group" role="group" ng-if="question.hasLogin">
         <a type="button" class="btn btn-default" href="{{question.download_link}}" target="_blank"><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Download as PDF</a>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#answer-modal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Show me answer</button>
@@ -69,10 +74,84 @@
             </div>
           </nav>
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
     <script src="js/angular.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/min/question.min.js"></script>
     <script src="js/prettify.js"></script>
+    <script src="js/JSAV/jquery.transit.js"></script>
+    <script src="js/JSAV/raphael.js"></script>
+    <script src="js/JSAV/dagre.min.js"></script>
+    <script src="js/JSAV/JSAV-min.js"></script>
+    <script>
+    var jsav = new JSAV("av");
+    var initGraph = function(opts) {
+      var g = jsav.ds.graph($.extend({width: 500, height: 350}, opts));
+      var a = g.addNode("A"),
+          b = g.addNode("B"),
+          c = g.addNode("C"),
+          d = g.addNode("D"),
+          e = g.addNode("E"),
+          f = g.addNode("F");
+      g.addEdge(a, b);
+      g.addEdge(a, c);
+      g.addEdge(b, d);
+      g.addEdge(e, a);
+      g.addEdge(d, e);
+      g.addEdge(d, f);
+      return g;
+     };
+    var l2 = jsav.label("Default automatic graph layout")
+    var g2 = initGraph({layout: "automatic"});
+    g2.layout();
+    jsav.label("Layered graph layout")
+    var g = initGraph({layout: "layered"});
+    g.layout();
+    jsav.displayInit();
+
+    // hide the "other" graph
+    g2.hide();
+    l2.hide();
+    jsav.step();
+
+    var preVisit = function(node, prev) {
+      node.addClass("processing");
+      jsav.umsg("Add node " + node.value() + " to the DFS search tree");
+      if (prev) {
+        node.edgeFrom(prev).css("stroke", "red"); // highlight
+        node.edgeTo(prev).css("stroke", "red"); // highlight
+      }
+      jsav.step();
+    };
+    var visit = function(node) {
+      node.addClass("visited");
+      jsav.umsg("Call DFS for node " + node.value());
+      jsav.step();
+    };
+    var postVisit = function(node) {
+      node.addClass("finished");
+      jsav.umsg("Done with node " + node.value());
+      jsav.step();
+    };
+    var dfs = function(start, prev) {
+      var successors,
+          next;
+      preVisit(start, prev);
+      successors = start.neighbors();
+      for (next = successors.next(); next; next = successors.next()) {
+        if (!next.hasClass("visited")) {
+          visit(next);
+          dfs(next, start);
+        }
+      }
+      postVisit(start);
+    };
+    visit(g.nodes()[0]);
+    dfs(g.nodes()[0]);
+    jsav.recorded();
+    </script>
+    <style>
+
+    </style>
 </body>
 </html>
