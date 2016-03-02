@@ -51,16 +51,23 @@
 					var labelClass = $scope.classType[parseInt($(this).attr('data-checked')) - 1];
 					$('#variable-label' + $(this).attr('data-variable')).attr('class', 'label label-' + labelClass);
 					index = parseInt($(this).attr('data-variable'));
-					var a = $('#collapse' + index + " input").eq(2).val().replace(/\s/g, ""),
-						b = $('#collapse' + index + " input").eq(3).val().replace(/\s/g, "");
+					var a = $('#collapse' + index + " input").eq(3).val().replace(/\s/g, ""),
+						b = $('#collapse' + index + " input").eq(4).val().replace(/\s/g, "");
 					setTimeout(function() {
-						if (a != "" && b != "") {
+						if ($('#collapse' + index + " input").eq(2).parent().hasClass('active')) {
+							$('#formula-line' + index).find('input').val('""');
+							$('.variable-range-container').hide();
+						} else if (a != "" && b != "") {
+							$('.variable-range-container').show();
 							if ($('#collapse' + index + " input").eq(0).parent().hasClass('active')) {
 								$('#formula-line' + index).find('input').val("RandomPackage.randomNum(" + a + "," + b + ");");
-							} else {
+							}else{
 								$('#formula-line' + index).find('input').val("RandomPackage.randomFloat(" + a + "," + b + ");");
 							}
-						};
+						} else {
+							$('.variable-range-container').show();
+							$('#formula-line' + index).find('input').val("");
+						}
 					}, 20);
 				});
 			}, 20);
@@ -68,12 +75,14 @@
 
 		$scope.updateFormula = function(index) {
 			var inputs = document.getElementById('collapse' + index).getElementsByTagName('input'),
-				a = inputs[2].value.replace(/\s/g, ""),
-				b = inputs[3].value.replace(/\s/g, "");
+				a = inputs[3].value.replace(/\s/g, ""),
+				b = inputs[4].value.replace(/\s/g, "");
 			if (a != "" && b != "") {
 				var variableType = inputs[0].value == "1" ? "Num" : "Float";
 				document.getElementById('formula-line' + index).getElementsByTagName('input')[0].value = "RandomPackage.random" + variableType + "(" + a + "," + b + ");";
-			};
+			}else{
+				document.getElementById('formula-line' + index).getElementsByTagName('input')[0].value = ""
+			}
 		}
 
 		$scope.editTitle = function() {

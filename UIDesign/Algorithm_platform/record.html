@@ -56,14 +56,18 @@
                                 <label class="btn btn-primary" ng-click="variable.type=2">
                                   <input type="radio" name="options{{variable.index}}"> Float
                                 </label>
+                                <label class="btn btn-warning" ng-click="variable.type=3">
+                                  <input type="radio" name="options{{variable.index}}"> String
+                                </label>
                               </div>
-
-                            <hr/>
+                              <div class="variable-range-container">
+                                <hr/>
                                 <span class="variable-label">range:</span>
                                 <div class="row variable-range">
                                   <div class="col-lg-6"><input type="number" class="form-control" ng-blur="updateFormula(variable.index)"></div>
                                   <div class="col-lg-6"><input type="number" class="form-control" ng-blur="updateFormula(variable.index)"></div>
                                 </div>
+                              </div>
                             </div>
                           </div>
                         </div>
