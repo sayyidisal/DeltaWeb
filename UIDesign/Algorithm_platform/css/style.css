@@ -445,10 +445,10 @@ a.tag-link:last-child:after{
   border-radius: 4px;
   border: 1px solid #555;
 }*/
-.jsavcounter {
+/*.jsavcounter {
   position: absolute;
   top: 15px;
-}
+}*/
 /*.jsavcanvas { height: 300px;}*/
 .visited {
   background-color: #ddd;
@@ -459,10 +459,6 @@ a.tag-link:last-child:after{
 .finished {
   background-color: black;
   color: white;
-}
-.jsavlabel {
-  font-size: 2em;
-  text-align: center;
 }
 /*page:taginfo*/
 .taginfo-container h3>span{
