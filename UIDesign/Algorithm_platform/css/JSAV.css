@@ -1,6 +1,9 @@
-.jsavcontainer {
+.jsavcontainer .jsavcontainer {
+  /*has bug in jsav, there should be only one jsavcontainer*/
+  /*shouldn't assign width to jsav*/
+  border-radius: 4px;
   overflow:hidden;
-  width: auto;
+  width: auto !important; /*overwrite the js width setting*/
   padding: 0.7em;
   border: 1px solid black;
   background-color: white;
@@ -13,7 +16,7 @@
   -ms-user-select: none;
   user-select: none;
 }
-.jsavcanvas {
+.jsavcanvas .jsavcanvas {
   position: relative;
   background-color: inherit;
   overflow-x: auto;

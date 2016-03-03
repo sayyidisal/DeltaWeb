@@ -66,6 +66,12 @@
 		$scope.question = questionData;
 		var graph = new vizJSAV("av",graphData["GRAPH"]);
 		graph.animate(1);
+
+		$scope.showAnswer = false;
+		$scope.toShow = function () {
+			$scope.showAnswer = !$scope.showAnswer;
+		}
+
 	}]);
 
 })()

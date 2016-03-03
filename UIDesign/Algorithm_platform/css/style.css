@@ -437,19 +437,19 @@ a.tag-link:last-child:after{
 #question-content{
 	margin-bottom: 60px;
 }
-#answer-modal .modal-body{
-	white-space: pre-line;
+#answer{
+	margin-bottom: 0
 }
-#av {
+/*#av {
   position: relative;
   border-radius: 4px;
   border: 1px solid #555;
-}
+}*/
 .jsavcounter {
   position: absolute;
   top: 15px;
 }
-.jsavcanvas { height: 300px;}
+/*.jsavcanvas { height: 300px;}*/
 .visited {
   background-color: #ddd;
 }

@@ -23,28 +23,16 @@
     <div id="question-content" class="monokai">
       <p>{{question.content}}</p>
       <code class="prettyprint linenums">{{question.code}}</code> 
-    <div id="av">
-    </div>    
+      <div id="av">
+      </div>
+      <div id="answer" class="alert alert-success" ng-show="showAnswer">
+        <strong>Answer:</strong> {{question.ANSWER}}
+      </div>   
       <div class="btn-group" role="group" ng-if="question.hasLogin">
         <a type="button" class="btn btn-default" href="{{question.download_link}}" target="_blank"><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Download as PDF</a>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#answer-modal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Show me answer</button>
+        <button type="button" class="btn btn-default" ng-click="toShow()"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> {{showAnswer? "Hide":"Show"}} answer</button>
       </div>
       <div ng-if="!question.hasLogin">Please log in to download the question or check the answer: <a href="index.html" class="">>> Log in.</a></div>
-      </div>
-        <!-- modal -->
-      <div class="modal fade" id="answer-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" >Answer</h4>
-          </div>
-          <div class="modal-body">{{question.answer}}</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 	<!-- move to html files when fetching from the server -->
@@ -81,6 +69,6 @@
     <script src="js/JSAV/raphael.js"></script>
     <script src="js/JSAV/dagre.min.js"></script>
     <script src="js/JSAV/JSAV-min.js"></script>
-    <script src="js/min/vizJSAV.min.js"></script>
+    <script src="js/min/vizJSAV-v2.min.js"></script>
 </body>
 </html>
